@@ -22,7 +22,7 @@ interface Product {
   images: [];
 }
 
-const ProductList = ({ products }) => {
+const ProductList: React.FC<Product> =({ products }) => {
   const dispatch = useAppDispatch();
   console.log('Products in ProductList:', products);
 
