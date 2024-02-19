@@ -22,23 +22,12 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "@/redux/feature/wishlistSlice";
+import { Product } from "@/types/types";
 
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: [];
-}
 
-export default function ProductDetail({ product }) {
+
+export default function ProductDetail({ product }: { product: Product }) {
   const dispatch = useAppDispatch();
 
   const currentQuantity = useAppSelector(getCurrentQuantityById(product.id));
@@ -71,7 +60,11 @@ export default function ProductDetail({ product }) {
 
   const handleAddToCart = () => {
     if (currentQuantity === 0) {
-      dispatch(addToCart(product));
+      dispatch(addToCart({
+        ...product,
+        quantity: 0,
+        unitPrice: 0
+      }));
 
       toast.success(`${product.title} added to the cart`, {
         position: "top-right",
