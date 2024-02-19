@@ -1,11 +1,14 @@
 export interface Product {
-  products: Product[];
-  id: string;
-  thumbnail: string;
+  id: number;
   title: string;
   description: string;
   price: number;
   discountPercentage: number;
+  rating: number;
+  stock: number;
   brand: string;
-  isLoading: boolean;
+  category: string;
+  thumbnail: string;
+  images: [];
+  products: any
 }

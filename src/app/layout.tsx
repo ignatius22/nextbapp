@@ -1,8 +1,7 @@
 "use client";
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/Header";
+import "./globals.css"
 import Footer from "@/components/Footer";
 import ReduxProvider from "@/redux/redux-provider";
 import { ToastContainer } from "react-toastify";

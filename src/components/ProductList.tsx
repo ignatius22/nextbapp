@@ -1,39 +1,18 @@
 "use client";
-
 import { formatCurrency } from "@/lib/util";
-import { addToCart } from "@/redux/feature/cartSlice";
-import { useAppDispatch } from "@/redux/store";
+import { Product } from "@/types/types";
 import { Box, Container, Grid } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: [];
-}
-
-const ProductList: React.FC<Product> =({ products }) => {
-  const dispatch = useAppDispatch();
-  console.log('Products in ProductList:', products);
-
-
-
+const ProductList: React.FC<Product> = ({products}) => {
   return (
     <Container>
       <Box sx={{ flexGrow: 1 }} flexWrap="wrap" marginTop={5}>
         <Grid container spacing={3}>
           {products.products &&
-            products.products.map((product) => (
+            products.products.map((product: Product) => (
               <Grid item xs={2.3} md={2.3} key={product.id}>
                 <Link
                   href={`/pages/products/${product.id}`}
@@ -104,14 +83,6 @@ const ProductList: React.FC<Product> =({ products }) => {
                     </Box>
                   </Box>
                 </Link>
-                <button
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    dispatch(addToCart(product));
-                  }}
-                >
-                  Add To Cart
-                </button>
               </Grid>
             ))}
         </Grid>

@@ -1,23 +1,10 @@
 "use client";
 import { query } from "@/actions/fetch-products";
 import ProductList from "@/components/ProductList";
+import { Product } from "@/types/types";
 import Loader from "@/ui/Loader";
 import { Box, Button, Container, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: [];
-}
+import { useEffect, useState } from "react";
 
 function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -25,11 +12,11 @@ function Products() {
   const [isLoading, setIsLoading] = useState(false);
   const limit = 10;
 
-  const fetchMoreProducts = async (newLimit) => {
+  const fetchMoreProducts = async (newLimit: number) => {
     try {
       setIsLoading(true);
       const { data: newProducts, loading } = await query(newLimit, skip);
-  
+
       if (!loading) {
         if (newProducts && newProducts.length > 0) {
           setProducts(
@@ -53,7 +40,7 @@ function Products() {
         const { data: initialProducts, loading } = await query(limit, 0);
 
         if (!loading) {
-          setProducts(initialProducts || []);
+          setProducts((initialProducts as unknown as Product[]) || []);
           setSkip(limit);
         }
       } catch (error) {
@@ -88,11 +75,28 @@ function Products() {
         </Typography>
       </Box>
 
-      {!isLoading ? <ProductList products={products} /> : <Loader />}
+      {!isLoading ? (
+        <ProductList
+          products={products}
+          id={0}
+          title={""}
+          description={""}
+          price={0}
+          discountPercentage={0}
+          rating={0}
+          stock={0}
+          brand={""}
+          category={""}
+          thumbnail={""}
+          images={[]}
+        />
+      ) : (
+        <Loader />
+      )}
       <Box textAlign="center" mt={12}>
         {isLoading && <Typography>Loading more products...</Typography>}
         {!isLoading && (
-          <Button variant="outlined" onClick={fetchMoreProducts}>
+          <Button onClick={() => fetchMoreProducts(limit)}>
             LOAD MORE PRODUCTS
           </Button>
         )}
