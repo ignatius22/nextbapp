@@ -7,6 +7,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 import {
   addToCart,
@@ -17,12 +18,10 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "@/redux/feature/wishlistSlice";
-import { Product } from "@/types/types";
-import { useSearchParams } from "next/navigation";
 
-export default function ProductDetail({ product }: { product: Product }) {
+export default function ProductDetail({ product }: { product: any }) {
   const dispatch = useAppDispatch();
-useSearchParams
+
   const currentQuantity = useAppSelector(getCurrentQuantityById(product.id));
   const [buttonText, setButtonText] = useState("Add to Cart");
   const [buttonColor, setButtonColor] = useState("#23A6F0");
@@ -33,7 +32,7 @@ useSearchParams
 
   const handleAddToWishlist = () => {
     dispatch(addToWishlist(product));
-    toast.success(`${product.title} added to the wishlist`, {
+    toast.success(`${product.title} added to the wish list`, {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -45,7 +44,7 @@ useSearchParams
 
   const handleRemoveFromWishlist = () => {
     dispatch(removeFromWishlist(product.id));
-    toast.error(`${product.title} removed from the wishlist`, {
+    toast.error(`${product.title} removed to the wish list`, {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -69,13 +68,7 @@ useSearchParams
 
   const handleAddToCart = () => {
     if (currentQuantity === 0) {
-      dispatch(
-        addToCart({
-          ...product,
-          quantity: 0,
-          price: 0,
-        })
-      );
+      dispatch(addToCart(product));
 
       toast.success(`${product.title} added to the cart`, {
         position: "top-right",

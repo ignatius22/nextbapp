@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 interface ProductType {
   id: number;
   quantity: number;
+  unitPrice?: number;
   totalPrice?: number;
   title?: string;
   description?: string;
@@ -22,22 +24,24 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action: PayloadAction<ProductType>) {
-      const { id, quantity, price } = action.payload;
+      const { id, quantity, unitPrice } = action.payload;
       const existingItem = state.cart.find((item) => item.id === id);
 
       if (existingItem) {
-        existingItem.quantity += quantity || 1;
+        // If the product already exists in the cart, update the quantity
+        existingItem.quantity += quantity || 1; // Assuming quantity is always at least 1
         existingItem.totalPrice =
-          existingItem.quantity * (existingItem.price ?? 0);
+          existingItem.quantity * (existingItem.unitPrice ?? 0);
       } else {
+        // If the product is not in the cart, add it
         state.cart.push({
           id,
           title: action.payload.title,
           description: action.payload.description,
           price: action.payload.price,
-          quantity: quantity || 1,
-          totalPrice:
-            (quantity || 1) * (price ?? action.payload.price ?? 0),
+          quantity: quantity || 1, // Assuming quantity is always at least 1
+          unitPrice: unitPrice ?? action.payload.price,
+          totalPrice: (quantity || 1) * (unitPrice ?? action.payload.price ?? 0),
           thumbnail: action.payload.thumbnail,
         });
       }
@@ -49,17 +53,18 @@ export const cartSlice = createSlice({
       const item = state.cart.find((item) => item.id === action.payload);
       if (item) {
         item.quantity++;
-        item.totalPrice = item.quantity * (item.price ?? 0);
+        item.totalPrice = item.quantity * (item.unitPrice ?? 0);
       }
     },
     decreaseItemQuantity(state, action: PayloadAction<number>) {
       const item = state.cart.find((item) => item.id === action.payload);
-
       if (item) {
         if (item.quantity > 1) {
+          // If quantity is greater than 1, decrement it
           item.quantity--;
-          item.totalPrice = item.quantity * (item.price ?? 0);
+          item.totalPrice = item.quantity * (item.unitPrice ?? 0);
         } else {
+          // If quantity is 1, remove the item from the cart
           state.cart = state.cart.filter(
             (cartItem) => cartItem.id !== action.payload
           );
