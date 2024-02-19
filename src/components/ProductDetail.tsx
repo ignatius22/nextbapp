@@ -18,10 +18,11 @@ import {
   removeFromWishlist,
 } from "@/redux/feature/wishlistSlice";
 import { Product } from "@/types/types";
+import { useSearchParams } from "next/navigation";
 
 export default function ProductDetail({ product }: { product: Product }) {
   const dispatch = useAppDispatch();
-
+useSearchParams
   const currentQuantity = useAppSelector(getCurrentQuantityById(product.id));
   const [buttonText, setButtonText] = useState("Add to Cart");
   const [buttonColor, setButtonColor] = useState("#23A6F0");
