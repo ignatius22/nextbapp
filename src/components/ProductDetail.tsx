@@ -5,13 +5,9 @@ import Rating from "@/ui/Rating";
 import { Box, Grid } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+
 
 import {
   addToCart,
@@ -248,59 +244,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                   </button>
                 )}
 
-                {/* <Box display={"flex"}>
-                  <Box
-                    width={30}
-                    height={30}
-                    borderRadius={30}
-                    bgcolor={"#ffffff"}
-                    alignItems={"center"}
-                    display={"flex"}
-                    textAlign={"center"}
-                    justifyContent={"center"}
-                  >
-                    <div onClick={() => dispatch(addToWishlist(product.id))}>
-                      <FavoriteBorderIcon
-                        htmlColor="#BDBDBD"
-                        sx={{ fontSize: 20 }}
-                      />
-                    </div>
-                  </Box>
-                  <Box
-                    width={30}
-                    height={30}
-                    borderRadius={30}
-                    bgcolor={"#ffffff"}
-                    alignItems={"center"}
-                    display={"flex"}
-                    textAlign={"center"}
-                    justifyContent={"center"}
-                  >
-                    <Link href={"#"}>
-                      <ShoppingCartOutlinedIcon
-                        htmlColor="#BDBDBD"
-                        sx={{ fontSize: 20 }}
-                      />
-                    </Link>
-                  </Box>
-                  <Box
-                    width={30}
-                    height={30}
-                    borderRadius={30}
-                    bgcolor={"#ffffff"}
-                    alignItems={"center"}
-                    display={"flex"}
-                    textAlign={"center"}
-                    justifyContent={"center"}
-                  >
-                    <Link href={"#"}>
-                      <RemoveRedEyeOutlinedIcon
-                        htmlColor="#BDBDBD"
-                        sx={{ fontSize: 20 }}
-                      />
-                    </Link>
-                  </Box>
-                </Box> */}
+               
                 <Box
                   alignItems={"center"}
                   display={"flex"}

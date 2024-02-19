@@ -259,7 +259,7 @@ export default function Header() {
                               fontWeight="600"
                               color="#252B42"
                             >
-                              {formatCurrency(item.unitPrice ?? 0)}
+                              {formatCurrency(item.price ?? 0)}
                             </Typography>
                             <Typography
                               fontFamily="inherit"
