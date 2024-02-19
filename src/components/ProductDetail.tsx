@@ -32,10 +32,26 @@ export default function ProductDetail({ product }: { product: Product }) {
 
   const handleAddToWishlist = () => {
     dispatch(addToWishlist(product));
+    toast.success(`${product.title} added to the wishlist`, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
   };
 
   const handleRemoveFromWishlist = () => {
     dispatch(removeFromWishlist(product.id));
+    toast.error(`${product.title} removed from the wishlist`, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
   };
 
   useEffect(() => {
