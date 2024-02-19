@@ -10,7 +10,7 @@ function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [skip, setSkip] = useState(11);
   const [isLoading, setIsLoading] = useState(false);
-  const limit = 10;
+  const limit = 30;
 
   const fetchMoreProducts = async (newLimit: number) => {
     try {
