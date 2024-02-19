@@ -8,7 +8,6 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 
-
 import {
   addToCart,
   getCurrentQuantityById,
@@ -19,9 +18,6 @@ import {
   removeFromWishlist,
 } from "@/redux/feature/wishlistSlice";
 import { Product } from "@/types/types";
-
-
-
 
 export default function ProductDetail({ product }: { product: Product }) {
   const dispatch = useAppDispatch();
@@ -56,11 +52,13 @@ export default function ProductDetail({ product }: { product: Product }) {
 
   const handleAddToCart = () => {
     if (currentQuantity === 0) {
-      dispatch(addToCart({
-        ...product,
-        quantity: 0,
-        unitPrice: 0
-      }));
+      dispatch(
+        addToCart({
+          ...product,
+          quantity: 0,
+          price: 0,
+        })
+      );
 
       toast.success(`${product.title} added to the cart`, {
         position: "top-right",
@@ -244,7 +242,6 @@ export default function ProductDetail({ product }: { product: Product }) {
                   </button>
                 )}
 
-               
                 <Box
                   alignItems={"center"}
                   display={"flex"}
@@ -258,10 +255,10 @@ export default function ProductDetail({ product }: { product: Product }) {
                       fontSize: 10,
                       color: "#333333",
                       border: "none",
-                      width:80,
+                      width: 80,
                       borderRadius: 4,
                       fontFamily: "inherit",
-                      fontWeight:"400"
+                      fontWeight: "400",
                     }}
                     onClick={handleAddToWishlist}
                     suppressHydrationWarning={true}
@@ -281,7 +278,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                         width: 80,
                         borderRadius: 4,
                         fontFamily: "inherit",
-                        fontWeight:"400"
+                        fontWeight: "400",
                       }}
                       onClick={handleRemoveFromWishlist}
                       suppressHydrationWarning={true}
