@@ -44,7 +44,7 @@ export default function Header() {
   const toggleModal = () => setIsOpen(!isOpen);
   const [isOpenWishList, setIsClosedWishList] = useState(false);
   const toggleModalWishList = () => setIsClosedWishList(!isOpenWishList);
-  const handleRemoveFromWishlist = (itemId) => {
+  const handleRemoveFromWishlist = (itemId: number) => {
     dispatch(removeFromWishlist(itemId));
   };
 
@@ -317,7 +317,7 @@ export default function Header() {
                         </Box>
                       </Box>
                     ) : (
-                      <li key={item.id}>Product data not available</li>
+                      <li >Product data not available</li>
                     );
                   })}
                   <Box borderTop="1px #ECECEC solid" my={3} py={0.5}>
